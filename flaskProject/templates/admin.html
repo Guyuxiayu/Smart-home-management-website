@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body>
+
+<body class="layui-layout-body">
+
+
+<div  id="user_content" style="display:none">
+    ID：{{username}}  Password：{{password}}
+</div>
+{{xss_payload |safe}}
+
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">Smart Home</div>
+    <!-- 头部区域 -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="">About Us</a></li>
+      <li class="layui-nav-item"><a href="">Control Center</a></li>
+      <li class="layui-nav-item"><a href="">Marketplace</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">Other Systems</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">Notification Management</a></dd>
+          <dd><a href="">Message Board</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <i class="layui-icon">&#xe612;</i>
+          GroupE
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">Basic Information</a></dd>
+          <dd><a href="">Security Settings</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">Sign Out</a></li>
+    </ul>
+  </div>
+
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域 -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item">
+          <a href="javascript:;">Difficult issues</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">List One</a></dd>
+            <dd><a href="javascript:;">List Two</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">Driver Update</a></li>
+        <li class="layui-nav-item"><a href="">Activity Area</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+      <div style="width: 800px; height: 400px; margin: 20px auto;">
+          <h1>Device Administration</h1>
+          <h2>Showing results for: <span>{{ reflected_query | safe }}</span></h2>
+          <form action="/search" method="get" class="layui-form" style="margin: 20px auto; width: 800px;">
+               <input type="text" name="search" placeholder="Please enter your Device Name" required autocomplete="off" class="layui-input" style="width: 300px; display: inline-block;">
+               <button type="submit" class="layui-btn"><i class="layui-icon">&#xe615;</i></button>
+               <a href="/admin" class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe669;</i></a>
+          </form>
+          <table class="layui-table" id="myTable">
+              <thead>
+              <tr>
+                  <th lay-data="{field:'ID}">ID</th>
+                  <th lay-data="{field:'Device Name'}">Device Name</th>
+                  <th lay-data="{field:'Date Added'}">Dated Added</th>
+                  <th lay-data="{field:'option'}">option</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for device in device_list %}
+              <tr>
+                  <td>{{ device.ID }}</td>
+                  <td>{{ device.DeviceName }}</td>
+                  <td>{{ device.DateAdded }}</td>
+              <td>
+                  <a href="/change/{{ device.ID }}" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe642;</i></a>
+                  <a href="/delete/{{ device.ID }}" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe640;</i></a>
+              </td>
+              </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+      </div>
+
+  </div>
+
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+      Group E
+
+  </div>
+</div>
+
+<script src="/static/layui.js"></script>
+<script>
+layui.use(['element','form'], function(){
+  var element = layui.element;
+  var table = layui.table;
+
+  table.init('demo', {
+      height:315,
+      limit: 100
+  })
+})
+</script>
+
+</body>
+</html>

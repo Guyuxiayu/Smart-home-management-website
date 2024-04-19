@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body>
+
+<div style="width: 500px;height: 400px;margin: 300px auto;">
+    <form class="layui-form" action="/login" method="POST" id="loginForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">Username</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" id="username" required lay-verify="required"
+                       placeholder="Please enter your username" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">Password</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" id="password" required lay-verify="required"
+                       placeholder="Please enter your password" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" onclick=" document.getElementById('loginForm').submit();">Login</button>
+                <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+            </div>
+        </div>
+    </form>
+    <div id="feedback" style="color: red;"></div>
+    {% if error_message %}<div style="color: red;">{{ error_message }}</div>{% endif %}
+</div>
+
+<script src="/static/layui.js"></script>
+<script>
+layui.use(['form', 'layer'], function() {
+    var form = layui.form;  // 加载form模块
+    var layer = layui.layer;  // 加载layer模块
+});
+</script>
+
+</body>
+</html>
+<!--
+<script>//dos攻击模拟
+function simulateDoS() {
+    setInterval(function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/login", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("username=attack&password=attack");
+    }, 10); // 每10毫秒发送一次请求
+}
+// 调用simulateDoS函数开始攻击
+simulateDoS();
+</script>
+-->

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>change</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body>
+
+<div style="width: 500px;height: 400px;margin: 300px auto;">
+    <form class="layui-form" action="/changed/{{ user.ID }}" method="POST">
+        <div class="layui-form-item">
+            <label class="layui-form-label">Device ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="ID" required
+                       lay-verify="required" placeholder="Please enter your Device ID"
+                       autocomplete="off"
+                       value="{{ user.ID }}"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">Device Name</label>
+            <div class="layui-input-block">
+                <input type="text" name="DeviceName" required
+                       lay-verify="required" placeholder="Please enter your Device Name"
+                       value="{{ user.DeviceName }}"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">Date Added</label>
+            <div class="layui-input-block">
+                <input type="text" name="DateAdded" required
+                       lay-verify="required" placeholder="Please enter your Date Added"
+                       value="{{ user.DateAdded }}"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">submit</button>
+      <button type="reset" class="layui-btn layui-btn-primary">reset</button>
+    </div>
+  </div>
+
+</form>
+</div>
+
+<script src="/static/layui.js"></script>
+<script>
+    layui.use(['form', 'layer'], function() {
+        var form = layui.form;
+    });
+</script>
+</body>
+</html>
